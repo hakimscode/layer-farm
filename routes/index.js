@@ -3,9 +3,11 @@ var router = express.Router();
 
 const SupplierController = require('../controllers/suppliers');
 const ProdukKategoriController = require('../controllers/produk_kategoris');
+const ProdukController = require('../controllers/produks');
 
 const supplierController = new SupplierController();
 const produkKategoriController = new ProdukKategoriController();
+const produkController = new ProdukController();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -24,5 +26,11 @@ router.get('/produk_kategori/:id', produkKategoriController.show);
 router.post('/produk_kategori', produkKategoriController.insert);
 router.put('/produk_kategori/:id', produkKategoriController.edit);
 router.delete('/produk_kategori/:id', produkKategoriController.delete);
+
+router.get('/produk', produkController.index);
+router.get('/produk/:id', produkController.show);
+router.post('/produk', produkController.insert);
+router.put('/produk/:id', produkController.edit);
+router.delete('/produk/:id', produkController.delete);
 
 module.exports = router;
