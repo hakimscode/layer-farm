@@ -7,6 +7,7 @@ const ProdukController = require('../controllers/produks');
 const CustomerController = require('../controllers/customers');
 const StandardProduksiController = require('../controllers/standard_produksis')
 const KandangController = require('../controllers/kandangs');
+const ProjectController = require('../controllers/projects')
 
 const supplierController = new SupplierController();
 const produkKategoriController = new ProdukKategoriController();
@@ -14,6 +15,7 @@ const produkController = new ProdukController();
 const customerController = new CustomerController();
 const standardProduksiController = new StandardProduksiController();
 const kandangController = new KandangController();
+const projectController = new ProjectController();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -56,5 +58,12 @@ router.get('/kandang/:id', kandangController.show);
 router.post('/kandang', kandangController.insert);
 router.put('/kandang/:id', kandangController.edit);
 router.delete('/kandang/:id', kandangController.delete);
+
+router.get('/project', projectController.index);
+router.get('/project/:id', projectController.show);
+router.post('/project', projectController.insert);
+router.put('/project/:id', projectController.edit);
+router.delete('/project/:id', projectController.delete);
+router.put('/project/closing/:id', projectController.closing);
 
 module.exports = router;

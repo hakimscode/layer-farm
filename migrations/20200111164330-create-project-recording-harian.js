@@ -1,34 +1,25 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('project', {
+    return queryInterface.createTable('project_recording_harians', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER(11)
       },
-      kandang_id: {
+      project_id: {
         type: Sequelize.INTEGER(11),
         references: {
-          model: 'kandang',
+          model: 'project',
           key: 'id'
         }
       },
-      periode: {
-        type: Sequelize.INTEGER(4)
-      },
-      populasi_awal: Sequelize.INTEGER(4),
-      tanggal_mulai: Sequelize.DATEONLY,
-      tanggal_closing: Sequelize.DATEONLY,
-      status: {
-        type: Sequelize.INTEGER(1),
-        defaultValue: 0
-      },
-      is_deleted: {
-        type: Sequelize.INTEGER(1),
-        defaultValue: 0
-      },
+      tanggal: Sequelize.DATEONLY,
+      hari: Sequelize.INTEGER(4),
+      pakan: Sequelize.INTEGER(4),
+      jumlah_telur: Sequelize.INTEGER(4),
+      tonase_telur: Sequelize.DOUBLE(4, 2),
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('project');
+    return queryInterface.dropTable('project_recording_harians');
   }
 };

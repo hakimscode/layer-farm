@@ -5,7 +5,7 @@ class ProdukController {
 
     async index(req, res, next){
         try{
-            const produk = await model.produk.findAllItems();
+            const produk = await model.produk.findAllItems({where: {'is_deleted': 0}});
             
             if(produk.length > 0){
                 res.json(res_json('OK', '', produk));
