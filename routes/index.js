@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
+/* controller */
 const SupplierController = require('../controllers/suppliers');
 const ProdukKategoriController = require('../controllers/produk_kategoris');
 const ProdukController = require('../controllers/produks');
 const CustomerController = require('../controllers/customers');
-const StandardProduksiController = require('../controllers/standard_produksis')
+const StandardProduksiController = require('../controllers/standard_produksis');
 const KandangController = require('../controllers/kandangs');
-const ProjectController = require('../controllers/projects')
+const ProjectController = require('../controllers/projects');
 
 const supplierController = new SupplierController();
 const produkKategoriController = new ProdukKategoriController();
@@ -19,8 +19,8 @@ const projectController = new ProjectController();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // res.render('index', { title: 'Express' });
-  res.send('Layer Farm API System');
+	// res.render('index', { title: 'Express' });
+	res.send('Layer Farm API System');
 });
 
 router.get('/suppliers', supplierController.index);
