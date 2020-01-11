@@ -4,10 +4,16 @@ var router = express.Router();
 const SupplierController = require('../controllers/suppliers');
 const ProdukKategoriController = require('../controllers/produk_kategoris');
 const ProdukController = require('../controllers/produks');
+const CustomerController = require('../controllers/customers');
+const StandardProduksiController = require('../controllers/standard_produksis')
+const KandangController = require('../controllers/kandangs');
 
 const supplierController = new SupplierController();
 const produkKategoriController = new ProdukKategoriController();
 const produkController = new ProdukController();
+const customerController = new CustomerController();
+const standardProduksiController = new StandardProduksiController();
+const kandangController = new KandangController();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -32,5 +38,23 @@ router.get('/produk/:id', produkController.show);
 router.post('/produk', produkController.insert);
 router.put('/produk/:id', produkController.edit);
 router.delete('/produk/:id', produkController.delete);
+
+router.get('/customer', customerController.index);
+router.get('/customer/:id', customerController.show);
+router.post('/customer', customerController.insert);
+router.put('/customer/:id', customerController.edit);
+router.delete('/customer/:id', customerController.delete);
+
+router.get('/standard_produksi', standardProduksiController.index);
+router.get('/standard_produksi/:id', standardProduksiController.show);
+router.post('/standard_produksi', standardProduksiController.insert);
+router.put('/standard_produksi/:id', standardProduksiController.edit);
+router.delete('/standard_produksi/:id', standardProduksiController.delete);
+
+router.get('/kandang', kandangController.index);
+router.get('/kandang/:id', kandangController.show);
+router.post('/kandang', kandangController.insert);
+router.put('/kandang/:id', kandangController.edit);
+router.delete('/kandang/:id', kandangController.delete);
 
 module.exports = router;
