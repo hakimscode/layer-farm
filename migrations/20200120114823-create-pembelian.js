@@ -1,19 +1,32 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('standard_produksi', {
+    return queryInterface.createTable('pembelian', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER(11)
+        type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(20)
+      tanggal: {
+        type: Sequelize.DATEONLY
       },
-      percentage: Sequelize.INTEGER(3),
+      project_id: {
+        type: Sequelize.INTEGER(11),
+        references: {
+          model: 'project',
+          key: 'id'
+        }
+      },
+      supplier_id: {
+        type: Sequelize.INTEGER(11),
+        references: {
+          model: 'suppliers',
+          key: 'id'
+        }
+      },
       is_deleted: {
-        type: Sequelize.INTEGER(2),
+        type: Sequelize.INTEGER(1),
         defaultValue: 0
       },
       createdAt: {
@@ -29,6 +42,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('standard_produksi');
+    return queryInterface.dropTable('pembelian');
   }
 };

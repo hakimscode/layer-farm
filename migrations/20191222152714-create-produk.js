@@ -19,13 +19,19 @@ module.exports = {
         type: Sequelize.STRING(50)
       },
       satuan: Sequelize.STRING(15),
+      is_deleted:{
+        type: Sequelize.INTEGER(1),
+        defaultValue: 0
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },

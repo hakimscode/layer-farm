@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-/* controller */
+
 const SupplierController = require('../controllers/suppliers');
 const ProdukKategoriController = require('../controllers/produk_kategoris');
 const ProdukController = require('../controllers/produks');
@@ -8,6 +8,8 @@ const CustomerController = require('../controllers/customers');
 const StandardProduksiController = require('../controllers/standard_produksis');
 const KandangController = require('../controllers/kandangs');
 const ProjectController = require('../controllers/projects');
+const PembelianController = require('../controllers/pembelians');
+const PenjualanController = require('../controllers/penjualans');
 
 const supplierController = new SupplierController();
 const produkKategoriController = new ProdukKategoriController();
@@ -16,6 +18,8 @@ const customerController = new CustomerController();
 const standardProduksiController = new StandardProduksiController();
 const kandangController = new KandangController();
 const projectController = new ProjectController();
+const penjualanController = new PenjualanController();
+const pembelianController = new PembelianController();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -65,5 +69,15 @@ router.post('/project', projectController.insert);
 router.put('/project/:id', projectController.edit);
 router.delete('/project/:id', projectController.delete);
 router.put('/project/closing/:id', projectController.closing);
+
+router.post('/project/recording_harian', projectController.insert_recording_harian);
+
+router.get('/pembelian', pembelianController.index);
+router.get('/pembelian/:id', pembelianController.show);
+router.post('/pembelian', pembelianController.insert);
+
+router.get('/penjualan', penjualanController.index);
+router.get('/penjualan/:id', penjualanController.show);
+router.post('/penjualan', penjualanController.insert);
 
 module.exports = router;

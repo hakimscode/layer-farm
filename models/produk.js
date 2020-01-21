@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'produk'
   });
   produk.associate = function(models) {
-    produk.kategori_id = produk.belongsTo(models.produk_kategori, {foreignKey: 'id', target_key: 'kategori_id'});
+    produk.kategori_id = produk.belongsTo(models.produk_kategori, {foreignKey: 'kategori_id', target_key: 'id'});
   };
 
   produk.findAllItems = function (){

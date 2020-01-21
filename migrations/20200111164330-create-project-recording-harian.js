@@ -19,14 +19,16 @@ module.exports = {
       hari: Sequelize.INTEGER(4),
       pakan: Sequelize.INTEGER(4),
       jumlah_telur: Sequelize.INTEGER(4),
-      tonase_telur: Sequelize.DOUBLE(4, 2),
+      tonase_telur: Sequelize.DOUBLE,
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },

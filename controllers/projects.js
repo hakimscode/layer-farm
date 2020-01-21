@@ -68,15 +68,21 @@ class ProjectController {
     async closing(req, res, next){
         const {tanggal_closing} = req.body
 
-        await model.sequelize.transaction(transaction => {
-            return model.project.update({
-                tanggal_closing,
-                status: 1
-            }, {
-                where: {
-                    id: req.params.id
-                }
-            }, transaction)
+        const result = await model.sequelize.transaction(async (t) => {
+            const closing = await model.sequelize.transaction(transaction => {
+                return model.project.update({
+                    tanggal_closing,
+                    status: 1
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                }, transaction)
+            })
+
+            // todo === add rekap to project_hut
+
+            return closing;
         })
         .then(result => res.json(res_json('OK', 'Project is done', result)))
         .catch(err => res.json(res_json('ERRORs', err.message, {})))
@@ -97,6 +103,41 @@ class ProjectController {
             }
         }catch (err){
             res.json(res_json('ERRORs', err.message, {}))
+        }
+    }
+
+    async get_sisa_pakan(req, res, next){
+        try{
+            
+        }catch (err){
+            
+        }
+    }
+
+    async insert_recording_harian(req, res, next){
+        try{
+            const { project_id, hari, pakan, jumlah_telur, tonase_telur } = req.body
+
+            const result = await model.sequelize.transaction(async (t) => {
+                const recording_harian = await model.project_recording_harians.create({
+                    project_id,
+                    tanggal: new Date(),
+                    hari,
+                    pakan,
+                    jumlah_telur,
+                    tonase_telur
+                }, {transaction: t});
+
+                await model.gudang_telur.update({
+                    jumlah: model.sequelize.literal('jumlah + ' + jumlah_telur),
+                    tonase: model.sequelize.literal('tonase + ' + tonase_telur)
+                }, {where: {'id': 1}, transaction: t});
+
+                return recording_harian;
+            })
+            res.json(res_json('OK', 'recording harian inserted successfully', result))
+        }catch (err){
+            res.json(res_json("ERRORs", err.message, {}))
         }
     }
 
