@@ -34,7 +34,7 @@ class ProdukController {
     async insert(req, res, next){
         try{
             const {kategori_id, nama_produk, satuan} = req.body;
-            const produk = await model.produk.create({kategori_id, nama_produk, satuan});
+            const produk = await model.produk.create({kategori_id, nama_produk, satuan}).then((produk) => {return model.produk.findById(produk.id)});
 
             if(produk){
                 res.status(201).json(res_json('OK', 'Produk inserted successfully', produk));
