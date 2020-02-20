@@ -5,7 +5,15 @@ class PembelianController {
 
     async index(req, res, next){
         try{
-            const pembelian = await model.pembelian.findAll({where: {'is_deleted': 0}}
+            const pembelian = await model.pembelian.findAll(
+                {
+                    where: {'is_deleted': 0},
+                    include: [
+                        'supplier',
+                        {model: model.pembelian_detail, as: 'pembelian_detail', include: 'produk'},
+                        {model: model.project, as: 'project', include: 'kandang'}
+                    ]
+                }
             );
             if(pembelian.length > 0){
                 res.json(res_json('OK', 'Berhasil', pembelian))
@@ -19,7 +27,16 @@ class PembelianController {
     
     async show(req, res, next){
         try{
-            const pembelian = await model.pembelian.findOne({where: {'id': req.params.id, 'is_deleted': 0}})
+            const pembelian = await model.pembelian.findOne(
+                {
+                    where: {'id': req.params.id, 'is_deleted': 0},
+                    include: [
+                        'supplier',
+                        {model: model.pembelian_detail, as: 'pembelian_detail', include: 'produk'},
+                        {model: model.project, as: 'project', include: 'kandang'}
+                    ]
+                }
+            )
             if(pembelian !== null){
                 res.json(res_json('OK', 'Berhasil', pembelian))
             }else{
@@ -46,11 +63,26 @@ class PembelianController {
                         jumlah_beli: jumlah_beli,
                         tonase_beli: tonase_beli
                     }, {transaction: t})
-                }).catch(err => {throw new Error()})
+
+                    const newPembelian = await model.pembelian.findOne(
+                        {
+                            where: {'id': res_data.id, 'is_deleted': 0},
+                            include: [
+                                'supplier',
+                                {model: model.pembelian_detail, as: 'pembelian_detail', include: 'produk'},
+                                {model: model.project, as: 'project', include: 'kandang'}
+                            ],
+                            transaction: t,
+                        }
+                    )
+    
+                    return newPembelian;
+``
+                }).catch(err => {throw new Error(err.message)})
 
                 return pembelian;
             })
-            res.json(res_json('OK', 'pembelian inserted successfully', result))
+            res.status(201).json(res_json('OK', 'pembelian inserted successfully', result))
         }catch (err){
             res.json(res_json('ERRORs', err.message, {}))
         }

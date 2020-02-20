@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'pembelian_detail'
   });
   pembelian_detail.associate = function(models) {
-    // associations can be defined here
+    pembelian_detail.produk_id = pembelian_detail.belongsTo(models.produk, {as: 'produk', foreignKey: 'produk_id', target_key: 'id'})
   };
   return pembelian_detail;
 };

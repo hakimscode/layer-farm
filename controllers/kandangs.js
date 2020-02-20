@@ -60,9 +60,10 @@ class KandangController {
                     id: req.params.id
                 }
             })
+            .then(() => { return model.kandang.findOne({where: {'id': req.params.id, 'is_deleted': 0}})})
 
             if(kandang){
-                res.json(res_json('OK', 'kandang updated successfully', kandang))
+                res.status(201).json(res_json('OK', 'kandang updated successfully', kandang))
             }
         }catch (err){
             res.status(400).json(res_json('ERRORs', err.message, {}))
