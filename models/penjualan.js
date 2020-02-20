@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'penjualan'
   });
   penjualan.associate = function(models) {
-    penjualan.hasMany(models.penjualan_detail, {as: 'detail', foreignKey: 'penjualan_id'})
+    penjualan.hasOne(models.penjualan_detail, {as: 'penjualan_detail', foreignKey: 'penjualan_id'});
+    penjualan.customer_id = penjualan.belongsTo(models.customer, {as: 'customer', foreignKey: 'customer_id', target_key: 'id'})
+    penjualan.project_id = penjualan.belongsTo(models.project, {as: 'project', foreignKey: 'project_id', target_key:'id'})
   };
 
   // penjualan.findAllItems = function (){
@@ -19,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
   //   })
   // };
 
-  // produk.findById = function (data){
-  //   return produk.findOne({
+  // penjualan.findById = function (data){
+  //   return penjualan.findOne({
   //     where: {'id':data, 'is_deleted': 0},
   //     include : [{association: produk.kategori_id}]
   //   })

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'kandang'
   });
   kandang.associate = function(models) {
-    // associations can be defined here
+    kandang.hasMany(models.project, {foreignKey: 'kandang_id'})
   };
   return kandang;
 };

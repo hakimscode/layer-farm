@@ -58,10 +58,11 @@ class SupplierController {
                 where: {
                     id: suppId
                 }
-            });
+            })
+            .then(() => { return model.supplier.findOne({where: {'id': req.params.id, 'is_deleted': 0}})});
 
             if(supplier){
-                res.json(res_json('OK', 'Supplier updated successfully', supplier));
+                res.status(201).json(res_json('OK', 'Supplier updated successfully', supplier));
             }
         }catch (err){
             res.status(400).json(res_json('ERRORs', err.message, {}));

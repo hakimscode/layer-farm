@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'pembelian'
   });
   pembelian.associate = function(models) {
-    // associations can be defined here
+    pembelian.hasOne(models.pembelian_detail, {as: 'pembelian_detail', foreignKey: 'pembelian_id'});
+    pembelian.supplier_id = pembelian.belongsTo(models.supplier, {as: 'supplier', foreignKey: 'supplier_id', target_key: 'id'})
+    pembelian.project_id = pembelian.belongsTo(models.project, {as: 'project', foreignKey: 'project_id', target_key:'id'})
   };
   return pembelian;
 };

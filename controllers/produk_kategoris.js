@@ -45,11 +45,14 @@ class ProdukKategoriController {
     async edit(req, res, next){
         try{
             const {nama} = req.body;
-            const produk_kategori = await model.produk_kategori.update({nama}, {where: {'id': req.params.id}});
+            const produk_kategori = await model.produk_kategori.update(
+                {nama},
+                {
+                    where: {'id': req.params.id}
+                }
+            ).then(() => {return model.produk_kategori.findOne({where: {'id': req.params.id, 'is_deleted': 0}})});
 
-            if(produk_kategori){
-                res.status(201).json(res_json('OK', 'Produk Kategori edited successfully', produk_kategori));
-            }
+            res.status(201).json(res_json('OK', 'Produk Kategori inserted successfully', produk_kategori));
         }catch (err){
             res.json(res_json('ERRORs', err.message, {}));
         }

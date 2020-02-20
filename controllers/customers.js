@@ -58,9 +58,10 @@ class CustomerController {
                     id: req.params.id
                 }
             })
+            .then(() => { return model.customer.findOne({where: {'id': req.params.id, 'is_deleted': 0}})});
 
             if(customer){
-                res.json(res_json('OK', 'Customer updated successfully', customer))
+                res.status(201).json(res_json('OK', 'Customer updated successfully', customer))
             }
         }catch (err){
             res.status(400).json(res_json('ERRORs', err.message, {}))

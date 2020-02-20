@@ -4,8 +4,13 @@ const res_json = require('../res')
 class ProjectController {
 
     async index(req, res, index) {
+        const params = req.params.qry ;
+        const qryWhere = params === 'all' ? {is_deleted: 0} : {status: params, is_deleted: 0}
+        console.log(qryWhere);
         try{
-            const project = await model.project.findAll({where: {'is_deleted': 0}})
+            const project = await model.project.findAllItems(
+                qryWhere
+            )
 
             if(project.length > 0){
                 res.json(res_json('OK', 'Berhasil', project))
@@ -19,7 +24,7 @@ class ProjectController {
 
     async show(req, res, index){
         try{
-            const project = await model.project.findByPk(req.params.id)
+            const project = await model.project.findById(req.params.id)
 
             if(project !== null){
                 res.json(res_json('OK', 'Berhasil', project))
@@ -56,9 +61,10 @@ class ProjectController {
                     id: req.params.id
                 }
             })
+            .then(() => { return model.project.findById(req.params.id)})
 
             if(project){
-                res.json(res_json('OK', 'Project updated successfully', project))
+                res.status(201).json(res_json('OK', 'Project updated successfully', project))
             }
         }catch (err){
             res.json(res_json('ERRORs', err.message, {}))

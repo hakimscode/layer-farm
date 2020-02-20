@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     tonase_telur: DataTypes.DOUBLE
   }, {});
   project_recording_harian.associate = function(models) {
-    // associations can be defined here
+    project_recording_harian.project_id = project_recording_harian.belongsTo(models.project, {foreignKey: 'project_id', target_key: 'id'});
   };
   return project_recording_harian;
 };
