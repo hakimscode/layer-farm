@@ -42,6 +42,7 @@ class ProjectController {
             const project = await model.project.create({
                 kandang_id, periode, populasi_awal, tanggal_mulai
             })
+            .then((project) => {return model.project.findById(project.id)});
 
             if(project){
                 res.status(201).json(res_json('OK', 'Project inserted successfully', project))
