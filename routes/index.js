@@ -74,7 +74,7 @@ router.put('/projects/closing/:id', projectController.closing);
 
 router.get('/gudang_telurs', gudangTelurController.index);
 
-router.post('/projects/recording_harian', projectController.insert_recording_harian);
+router.post('/project/recording_harian', projectController.insert_recording_harian);
 
 router.get('/pembelian', pembelianController.index);
 router.get('/pembelian/:id', pembelianController.show);
