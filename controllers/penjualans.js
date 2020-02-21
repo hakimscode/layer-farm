@@ -95,7 +95,7 @@ class PenjualanController {
                         WHERE project_id = project.id
                     ) - 
                     (
-                        SELECT SUM(penjualan_detail.jumlah_jual)
+                        SELECT IFNULL(SUM(penjualan_detail.jumlah_jual), 0)
                         FROM penjualan
                         JOIN penjualan_detail ON penjualan_detail.penjualan_id = penjualan.id
                         WHERE penjualan.project_id = project.id
