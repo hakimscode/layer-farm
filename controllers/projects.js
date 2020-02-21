@@ -15,10 +15,10 @@ class ProjectController {
             if(project.length > 0){
                 res.json(res_json('OK', 'Berhasil', project))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -29,10 +29,10 @@ class ProjectController {
             if(project !== null){
                 res.json(res_json('OK', 'Berhasil', project))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -47,7 +47,7 @@ class ProjectController {
                 res.status(201).json(res_json('OK', 'Project inserted successfully', project))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -67,7 +67,7 @@ class ProjectController {
                 res.status(201).json(res_json('OK', 'Project updated successfully', project))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -91,7 +91,7 @@ class ProjectController {
             return closing;
         })
         .then(result => res.json(res_json('OK', 'Project is done', result)))
-        .catch(err => res.json(res_json('ERRORs', err.message, {})))
+        .catch(err => res.status(400).json(res_json('ERRORs', err.message, {})))
     }
 
     async delete(req, res, index){
@@ -108,7 +108,7 @@ class ProjectController {
                 res.json(res_json('OK', 'Project deleted successfully', project))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 

@@ -18,10 +18,10 @@ class PembelianController {
             if(pembelian.length > 0){
                 res.json(res_json('OK', 'Berhasil', pembelian))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
     
@@ -40,10 +40,10 @@ class PembelianController {
             if(pembelian !== null){
                 res.json(res_json('OK', 'Berhasil', pembelian))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -84,7 +84,7 @@ class PembelianController {
             })
             res.status(201).json(res_json('OK', 'pembelian inserted successfully', result))
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 

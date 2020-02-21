@@ -9,10 +9,10 @@ class KandangController {
             if(kandang.length > 0){
                 res.json(res_json('OK', 'Berhasil', kandang))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 

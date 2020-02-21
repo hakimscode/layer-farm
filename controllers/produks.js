@@ -10,10 +10,10 @@ class ProdukController {
             if(produk.length > 0){
                 res.json(res_json('OK', '', produk));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -24,7 +24,7 @@ class ProdukController {
             if(produk !== null){
                 res.json(res_json('OK', '', produk));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
             res.json(res_json(res_json('ERRORs', err.message, {})));
@@ -40,7 +40,7 @@ class ProdukController {
                 res.status(201).json(res_json('OK', 'Produk inserted successfully', produk));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -53,7 +53,7 @@ class ProdukController {
                 res.status(201).json(res_json('OK', 'Produk edited successfully', produk));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -65,7 +65,7 @@ class ProdukController {
                 res.status(201).json(res_json('OK', 'Produk deleted successfully', produk));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 

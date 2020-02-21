@@ -14,10 +14,10 @@ class PenjualanController {
             if(penjualan.length > 0){
                 res.json(res_json('OK', 'Berhasil', penjualan))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
     
@@ -34,10 +34,10 @@ class PenjualanController {
             if(penjualan !== null){
                 res.json(res_json('OK', 'Berhasil', penjualan))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -80,7 +80,7 @@ class PenjualanController {
             })
             res.status(201).json(res_json('OK', 'Penjualan inserted successfully', result))
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -112,7 +112,7 @@ class PenjualanController {
                 return res.json(res_json('OK', 'Success', stokTelur));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, 0));
+            res.status(400).json(res_json('ERRORs', err.message, 0));
         }
     }
 

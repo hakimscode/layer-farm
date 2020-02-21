@@ -9,10 +9,10 @@ class SupplierController {
             if(supplier.length > 0){
                 res.json(res_json('OK', '', supplier));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -22,10 +22,10 @@ class SupplierController {
             if(supplier !== null){
                 res.json(res_json('OK', '', supplier));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -42,7 +42,7 @@ class SupplierController {
                 res.status(201).json(res_json('OK', 'Supplier inserted successfully', supplier));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 

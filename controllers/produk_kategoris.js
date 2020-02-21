@@ -9,10 +9,10 @@ class ProdukKategoriController {
             if(produk_kategori.length > 0){
                 res.json(res_json('OK', '', produk_kategori));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -22,10 +22,10 @@ class ProdukKategoriController {
             if(produk_kategori !== null){
                 res.json(res_json('OK', '', produk_kategori));
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}));
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -54,7 +54,7 @@ class ProdukKategoriController {
 
             res.status(201).json(res_json('OK', 'Produk Kategori inserted successfully', produk_kategori));
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 
@@ -66,7 +66,7 @@ class ProdukKategoriController {
                 res.status(201).json(res_json('OK', 'Produk Kategori deleted successfully', produk_kategori));
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}));
+            res.status(400).json(res_json('ERRORs', err.message, {}));
         }
     }
 

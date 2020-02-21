@@ -9,10 +9,10 @@ class StandardProduksiController {
             if(standard_produksi.length > 0){
                 res.json(res_json('OK', 'Berhasil', standard_produksi))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -23,10 +23,10 @@ class StandardProduksiController {
             if(standard_produksi !== null){
                 res.json(res_json('OK', 'Berhasil', standard_produksi))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 

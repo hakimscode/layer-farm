@@ -9,10 +9,10 @@ class CustomerController {
             if(customer.length > 0){
                 res.json(res_json('OK', 'Berhasil', customer))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -22,10 +22,10 @@ class CustomerController {
             if(customer !== null){
                 res.json(res_json('OK', 'Berhasil', customer))
             }else{
-                res.json(res_json('ERROR', 'EMPTY', {}))
+                res.status(400).json(res_json('ERROR', 'EMPTY', {}))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
@@ -42,7 +42,7 @@ class CustomerController {
                 res.status(201).json(res_json('OK', 'Customer inserted successfully', customer))
             }
         }catch (err){
-            res.json(res_json('ERRORs', err.message, {}))
+            res.status(400).json(res_json('ERRORs', err.message, {}))
         }
     }
 
